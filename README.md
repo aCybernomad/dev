@@ -1,10 +1,12 @@
 GIT
 ==============================
 git status
-git add .
-git commit -m "text"
-git push -u origin koa <- namn på branchen
 
+git add .
+
+git commit -m "text"
+
+git push -u origin koa <- namn på branchen
 
 
 DOCKER
