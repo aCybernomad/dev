@@ -23,9 +23,11 @@ docker login -u undefined0x@protonmail.com
 Tag and Push
 
 tag  -> $ docker tag local-image:tag dockerhub-username/repository-name:tag
+
 ex.  -> $ docker tag iss:1 bugzapper/koa-koa:1
 
 push -> $ docker push dockerhub-username/repository-name:tag
+
 ex. ->  $ docker push bugzapper/koa-koa:1
 
 Pull
