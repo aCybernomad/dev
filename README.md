@@ -12,26 +12,34 @@ git push -u origin koa <- namn på branchen
 DOCKER
 ==============================
 
-docker build -t iss:1 . <- iss = namnet. : = tag
+docker build -t namn:tag .
 
-docker run -d -p 3000:3000 iss:1 <- port i docker och port på datorn sen namnet som ovan
+docker build -t iss:1 . (. = allt i dir)
+
+docker run -d(etached) -p(ort) 3000:3000 namn:tag
+
+docker run -d -p 3000:3000 iss:1 
+
+Login Docker Hub
 
 docker login -u undefined0x@protonmail.com
-       password:
+
+       password:*******
 
 
 Tag and Push
 
-tag  -> $ docker tag local-image:tag dockerhub-username/repository-name:tag
+Tag: docker tag local-image:tag dockerhub-username/repository-name:tag
 
-ex.  -> $ docker tag iss:1 bugzapper/koa-koa:1
+Exempel Tag: docker tag iss:1 bugzapper/koa-koa:1
 
-push -> $ docker push dockerhub-username/repository-name:tag
+Push: docker push dockerhub-username/repository-name:tag
 
-ex. ->  $ docker push bugzapper/koa-koa:1
+Exempel Push: docker push bugzapper/koa-koa:1
 
-Pull
-ex. ->  $ docker pull bugzapper/koa-koa:1
+Pull:
+
+docker pull bugzapper/koa-koa:1
 
 
 
