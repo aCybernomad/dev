@@ -1,36 +1,34 @@
 const Koa = require('koa');
 const axios = require('axios');
+const views = require('koa-views');
+const path = require('path');
 
 const app = new Koa();
 
+// Set up EJS as the template engine
+app.use(views(path.join(__dirname, 'views'), { extension: 'ejs' }));
+
 app.use(async (ctx) => {
-  try {
-    const apiUrl = 'http://api.open-notify.org/iss-now.json';
+  const apiUrl = 'http://api.open-notify.org/iss-now.json';
 
-    // Make the API call using Axios
-    const response = await axios.get(apiUrl);
+  // Make the API call using Axios
+  const response = await axios.get(apiUrl);
 
-    // Extract latitude and longitude from the response data
-    const { message, iss_position } = response.data;
+  // Extract latitude and longitude from the response data
+  const { message, iss_position } = response.data;
 
-    if (message === 'success' && iss_position) {
-      const { latitude, longitude } = iss_position;
+  if (message === 'success' && iss_position) {
+    const { latitude, longitude } = iss_position;
 
-      // Respond with latitude and longitude
-      ctx.body = {
-        latitude,
-        longitude,
-      };
-
-    } else {
-      // Respond with an error message
-      ctx.status = 500;
-      ctx.body = { error: 'API request failed' };
-    }
-  } catch (error) {
-    console.error('Error:', error.message);
+    // Render the index.ejs template with latitude and longitude
+    await ctx.render('index', {
+      latitude,
+      longitude,
+    });
+  } else {
+    // Respond with an error message
     ctx.status = 500;
-    ctx.body = { error: 'Internal Server Error' };
+    ctx.body = { error: 'API request failed' };
   }
 });
 
